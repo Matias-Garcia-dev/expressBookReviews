@@ -38,6 +38,28 @@ public_users.get('/', async (req, res) => {
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+// Get book details based on ISBN
+public_users.get('/isbn/:isbn', async (req, res) => {
+  try {
+    const isbn = parseInt(req.params.isbn);
+
+    const bookDetailsPromise = new Promise((resolve, reject) => {
+      if (books[isbn]) {
+        resolve(books[isbn]);
+      } else {
+        reject({ error: 'Book not found' });
+      }
+    });
+
+    const bookDetails = await bookDetailsPromise;
+
+    return res.status(200).json(bookDetails);
+  } catch (error) {
+    console.error(error);
+    return res.status(404).json(error);
+  }
+});
   
 // Get book details based on author
 public_users.get('/author/:author', function (req, res) {
