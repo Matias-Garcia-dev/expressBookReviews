@@ -21,12 +21,14 @@ app.use("/customer/auth/*", function auth(req, res, next) {
 
   try {
     const decoded = jwt.verify(req.session.accessToken, 'your-secret-key');
+
     req.user = decoded;
     next();
   } catch (error) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 });
+
 
 const PORT = 5000;
 
