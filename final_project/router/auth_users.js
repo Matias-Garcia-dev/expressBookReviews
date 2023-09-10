@@ -5,7 +5,7 @@ const regd_users = express.Router();
 
 let users = [];
 
-const jwtSecretKey = 'your-secret-key';
+const jwtSecretKey = 'key';
 
 const isValid = (username, password)=>{ 
   const user = users.find((user) => user.username === username && user.password === password);
